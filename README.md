@@ -6,6 +6,8 @@
 - [最终结果n-gram](./result/)
 - [题目要求](./20160426作业.pdf)
 
+- [Github地址](https://github.com/sunshineclt/n-gram)
+
 ## 使用
 - 方法一（无语料）
 	- 更改爬虫中要爬的起始日期和结束日期
