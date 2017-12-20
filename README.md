@@ -1,47 +1,49 @@
-# Linux课程作业-新浪新闻爬虫+分词分析
-## 项目结构
-- [爬虫脚本](./reptile.py)
-- [封装了以日期为文件名的文件操作的类](./FileOperator.py)
-- [n-gram分词分析](./nGram.py)
-- [最终结果n-gram](./result/)
-- [题目要求](./20160426作业.pdf)
+# Sina news crawler + word segementation
+## Project Structure
+- [Crawler Script](./reptile.py)
+- [File operation(with date as filename)](./FileOperator.py)
+- [n-gram word segmentation](./nGram.py)
+- [Final result n-gram](./result/)
+- [Requirement of the project](./20160426作业.pdf)
 
-- [Github地址](https://github.com/sunshineclt/n-gram)
+- [Github address](https://github.com/sunshineclt/n-gram)
 
-## 使用
-- 方法一（无语料）
-	- 更改爬虫中要爬的起始日期和结束日期
-	- 运行爬虫脚本
-	- 修改nGram.py中处理的起始日期和结束日期
-	- 修改nGram.py中处理的参数（频数要求、凝固程度、自由程度的要求）
-	- 运行nGram.py
-	- 等待nGram.py运行，运行结束后会出现1Gram.txt-5Gram.txt
-- 方法二（已有语料）
-	- 修改nGram.py中处理的参数（频数要求、凝固程度、自由程度的要求）
-	- 运行时给予nGram.py一个参数，代表语料文件，暂时只支持单语料文件
-	- 等待nGram.py运行，运行结束后会出现1Gram.txt-5Gram.txt
+## Usage
+- Method1 (Without news material)
+	- Change the start date and end date for news crawler
+	- Run Crawler
+	- Change start date and end date in nGram.py
+	- Change parameters(Frequency, Freedom, Condensation) in nGram.py
+	- Run nGram.py
+	- Wait for nGram.py
+	- 1Gram.txt-5Gram.txt will be generated when nGram.py ends
+- Method2 (With news material)
+	- Change parameters(Frequency, Freedom, Condensation) in nGram.py
+	- Run nGram.py
+	- Wait for nGram.py
+	- 1Gram.txt-5Gram.txt will be generated when nGram.py ends
 
-## 优点
-- 爬虫部分考虑了多种干扰因素，如：
-	- gzip压缩
-	- <p></p>中其他标签的干扰（有的甚至有<font><font></font></font>嵌套一千多次的情况。。。正则表达式直接卡死。。。）
-	- 应要求没有使用HTTPParser，纯正则表达式解析
-- n-gram分词分析部分
-	- [参考文献](http://www.matrix67.com/blog/archives/5044)
-	- 采用了三种指标判定是否为词
-		- 词频
-		- 凝固程度（即“电影院”不是“电”+“影院”或“电影”+“院“）
-		- 自由程度（即“伊拉克”不是“伊拉”，也不是”拉客“）
-- 注释齐全
-	- 基本每一行代码都有注释解释
-- 二字词、三字词效果很好
+## Advantages
+- Several crawler interferences are solved, such as
+	- gzip compress
+	- Other html attribute in <p></p> (Some webpage even has <font><font></font></font> nested more than 1k times, which causes Rugular Expression to be dead)
+	- I don't use HTTPParser as required but to use Regular Expression
+- n-gram word segmentation
+	- [references](http://www.matrix67.com/blog/archives/5044)
+	- adopt three measurement to decide word segmentation
+		- Work Frequency
+		- Condensation（即“电影院”不是“电”+“影院”或“电影”+“院“）
+		- Freedom（即“伊拉克”不是“伊拉”，也不是”拉客“）
+- Good Comment
+	- Almost every line of code has comments
+- 2-character, 3-character words' performance is extremely great
 
-## 不足
-- 爬虫部分会有爬到一些乱码的情况，目测有一部分是新浪的问题，有一部分是我处理的问题（非gb2312编码我也一视同仁用gb2312编码解码了）
-- n-gram分词分析部分需要占用较大内存，虽然已经进行了一定的内存控制，但仍然需要占用较大内存
-- n-gram分词分析部分算法时间复杂度有优化空间，但可能需要进一步的空间代价
-- n-gram分词分析部分没有考虑虚词的影响，结果中仍然存在如”激烈的“这种三字词
-- 相比之下四字词效果较差，五字词虽然我已经多次降低其各方面标准（词频、凝固程度、自由程度），无奈200M的语料情况下还是没有能够出来
+## Disadvantages
+- Crawler may encounter some encoding problems, some of them are Sina's matter but some are due to my decoding method (Some of the webpage are not encoded with gb2312)
+- n-gram word segmentation requires a large amount of memory, although I've used some memory control method
+- n-gram word segmentation could be improved in time complexity, although it may require even bigger space complexity
+- n-gram word segmentation did not consider function word such as 3-character word: “激烈的”
+- 4-character and 5-character words' performance is relatively bad. There is no 5-character words in 200M news material even though I've lower the standard for 5-character word.
 
 ## Authored By Chen Letian at 2016.05.14
 
